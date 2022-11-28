@@ -3,11 +3,13 @@ package it.prova.gestioneagenda.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.prova.gestioneagenda.model.Agenda;
 import it.prova.gestioneagenda.repository.agenda.AgendaRepository;
 
+@Service
 public class AgendaServiceImpl implements AgendaService {
 	@Autowired
 	private AgendaRepository repository;
