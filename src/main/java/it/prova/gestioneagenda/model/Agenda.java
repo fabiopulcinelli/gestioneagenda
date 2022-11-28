@@ -33,6 +33,13 @@ public class Agenda {
 	public Agenda() {
 	}
 
+	public Agenda(String descrizione, LocalDateTime dataOraInizio, LocalDateTime dataOraFine) {
+		super();
+		this.descrizione = descrizione;
+		this.dataOraInizio = dataOraInizio;
+		this.dataOraFine = dataOraFine;
+	}
+	
 	public Agenda(Long id, String descrizione, LocalDateTime dataOraInizio, LocalDateTime dataOraFine) {
 		super();
 		this.id = id;

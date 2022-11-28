@@ -109,6 +109,7 @@ public class AgendaDTO {
 
 	public static List<AgendaDTO> createAgendaDTOListFromModelList(List<Agenda> modelListInput, boolean includeUtenti) {
 		return modelListInput.stream().map(agendaEntity -> {
+			
 			return AgendaDTO.buildAgendaDTOFromModel(agendaEntity, includeUtenti);
 		}).collect(Collectors.toList());
 	}

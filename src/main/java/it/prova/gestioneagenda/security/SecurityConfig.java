@@ -47,6 +47,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				//tutti gli utenti autenticati possono richiedere le info
 				.antMatchers("/api/utente/userInfo").authenticated()
 				.antMatchers("/api/utente/**").hasRole("ADMIN")
+				
+				// un utente non admin puo eseguire solo findbyid, update e delete (del suo id)
+				.antMatchers("/api/agenda/findById/**", "/api/agenda/update/**", "/api/agenda/delete/**").authenticated()
+				.antMatchers("/api/agenda/**").hasRole("ADMIN")
 				.antMatchers("/**").hasAnyRole("ADMIN", "CLASSIC_USER")
 				// .antMatchers("/anonymous*").anonymous()
 				.anyRequest().authenticated()

@@ -1,6 +1,7 @@
 package it.prova.gestioneagenda;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,6 +85,19 @@ public class GestioneagendaApplication implements CommandLineRunner {
 		}
 
 		// Mettere dati agenda
+		LocalDateTime oraInizio = LocalDateTime.now();
+		LocalDateTime oraFine = LocalDateTime.of(2025, Month.JUNE, 29, 19, 30, 40);
+		Agenda agenda1 = new Agenda("Agenda 1", oraInizio, oraFine);
+		agenda1.setUtente(utenteServiceInstance.findByUsername("admin"));
+		
+		if (agendaService.findByDescrizione(agenda1.getDescrizione()).isEmpty())
+			agendaService.inserisciNuovo(agenda1);
+		
+		Agenda agenda2 = new Agenda("Agenda 2", oraInizio, oraFine);
+		agenda2.setUtente(utenteServiceInstance.findByUsername("user"));
+		
+		if (agendaService.findByDescrizione(agenda2.getDescrizione()).isEmpty())
+			agendaService.inserisciNuovo(agenda2);
 	}
 
 }
