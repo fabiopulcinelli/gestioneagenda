@@ -92,7 +92,7 @@ public class AgendaDTO {
 	public Agenda buildAgendaModel() {
 		Agenda result = new Agenda(this.id, this.descrizione, this.dataOraInizio, this.dataOraFine);
 		if (this.utente != null)
-			result.setUtente(this.utente.buildUtenteModel(true));
+			result.setUtente(this.utente.buildUtenteModel(true,true));
 
 		return result;
 	}

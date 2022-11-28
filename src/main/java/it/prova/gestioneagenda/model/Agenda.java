@@ -40,6 +40,11 @@ public class Agenda {
 		this.dataOraInizio = dataOraInizio;
 		this.dataOraFine = dataOraFine;
 	}
+	
+	public Agenda(Long id) {
+		super();
+		this.id = id;
+	}
 
 	public Long getId() {
 		return id;

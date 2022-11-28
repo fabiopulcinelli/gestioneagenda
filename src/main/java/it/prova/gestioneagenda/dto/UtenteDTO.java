@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import it.prova.gestioneagenda.model.Agenda;
 import it.prova.gestioneagenda.model.Ruolo;
 import it.prova.gestioneagenda.model.StatoUtente;
 import it.prova.gestioneagenda.model.Utente;
@@ -39,6 +40,8 @@ public class UtenteDTO {
 	private StatoUtente stato;
 
 	private Long[] ruoliIds;
+	
+	private Long[] agendeIds;
 
 	public UtenteDTO() {
 	}
@@ -131,12 +134,22 @@ public class UtenteDTO {
 	public void setRuoliIds(Long[] ruoliIds) {
 		this.ruoliIds = ruoliIds;
 	}
+	
+	public Long[] getAgendeIds() {
+		return agendeIds;
+	}
 
-	public Utente buildUtenteModel(boolean includeIdRoles) {
+	public void setAgendeIds(Long[] agendeIds) {
+		this.agendeIds = agendeIds;
+	}
+
+	public Utente buildUtenteModel(boolean includeIdRoles, boolean includeIdAgende) {
 		Utente result = new Utente(this.id, this.username, this.password, this.nome, this.cognome, this.email,
 				this.dateCreated, this.stato);
 		if (includeIdRoles && ruoliIds != null)
 			result.setRuoli(Arrays.asList(ruoliIds).stream().map(id -> new Ruolo(id)).collect(Collectors.toSet()));
+		if (includeIdAgende && agendeIds != null)
+			result.setAgende(Arrays.asList(agendeIds).stream().map(id -> new Agenda(id)).collect(Collectors.toSet()));
 
 		return result;
 	}
@@ -148,6 +161,10 @@ public class UtenteDTO {
 
 		if (!utenteModel.getRuoli().isEmpty())
 			result.ruoliIds = utenteModel.getRuoli().stream().map(r -> r.getId()).collect(Collectors.toList())
+					.toArray(new Long[] {});
+		
+		if (!utenteModel.getAgende().isEmpty())
+			result.agendeIds = utenteModel.getAgende().stream().map(r -> r.getId()).collect(Collectors.toList())
 					.toArray(new Long[] {});
 
 		return result;
